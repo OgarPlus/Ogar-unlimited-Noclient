@@ -28,6 +28,8 @@ module.exports = class WorldModel {
       case "moving":
         this.setNodeAsMoving(id, node);
         break;
+      case "virus":
+        this.setNodeAsVirus(id,node);
     }
   }
 
@@ -112,6 +114,9 @@ module.exports = class WorldModel {
 
   setNodeAsMoving(id, node) {
     this.movingNodes.set(id, node);
+  }
+  setNodeAsVirus(id, node) {
+    this.virusNodes.set(id, node);
   }
 
   removeMovingNode(id) {
