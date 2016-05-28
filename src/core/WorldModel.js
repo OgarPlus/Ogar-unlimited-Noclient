@@ -98,6 +98,8 @@ module.exports = class WorldModel {
     this.nodes.delete(id);
     this.movingNodes.delete(id);
     this.playerNodes.delete(id);
+    this.ejectedNodes.delete(id);
+    this.virusNodes.delete(id);
   }
 
   removeMovingNode(node) {
