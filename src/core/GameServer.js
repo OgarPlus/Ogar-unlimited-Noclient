@@ -31,11 +31,6 @@ module.exports = class GameServer {
     this.lastPlayerId = 1;
     this.running = true;
     this.multiverse = multiverse;
-    this._nodes = [];
-    this._movingNodes = [];
-    this._nodesPlayer = []; // Nodes controlled by players
-    this._nodesVirus = []; // Virus nodes
-    this._nodesEjected = []; // Ejected mass nodes
     this._rainbowNodes = [];
     this._nodesMother = [];
     this._nodesBeacon = [];
@@ -511,8 +506,8 @@ startingFood() {
   // todo for now leave it here
   addNode(node, type) {
     this.world.setNode(node.getId(), node, type);
-
-   this._nodes.push(node);
+this.world.setAsNode(node.getId(),node);
+//   this._nodes.push(node);
     //if (type === "moving") {
     //  this.setAsMovingNode(node);
     //}
@@ -599,12 +594,12 @@ stop() {
   this.statServer.stop()
 }
   getPlayerNodes() {
-    return this._nodesPlayer;
+    return this.world.getNodes("player").toArray();
     //return this._nodesPlayer;
   }
 
   addPlayerNode(node) {
-    this._nodesPlayer.push(node);
+    this.world.addNode(node, "player");
   }
 
   getNodesPlayer() {
@@ -623,41 +618,32 @@ stop() {
 
   // Virus Nodes
   getVirusNodes() {
-    return this._nodesVirus;
+    return this.world.getNodes("virus").toArray();
   }
 
   addVirusNodes(node) {
-    this._nodesVirus.push(node);
+    this.world.addNode(node, "virus");
   }
 
   removeVirusNode(node) {
-    let index = this._nodesVirus.indexOf(node);
-    if (index != -1) {
-      this._nodesVirus.splice(index, 1);
-    } else {
-      // todo do we really care?
-      console.log("[Warning] Tried to remove a non existing moving virus!");
-    }
-  }
-
+   this.removeNode(node);
+    
+}
   // Ejected Nodes
   getEjectedNodes() {
-    return this._nodesEjected;
+    return this.world.getNodes("ejected").toArray();
   }
 
   addEjectedNodes(node) {
-    this._nodesEjected.push(node);
+    this.world.addNode(node, "ejected");
   }
 
   removeEjectedNode(node) {
-    let index = this._nodesEjected.indexOf(node);
-    if (index != -1) {
-      this._nodesEjected.splice(index, 1);
-    }
+    this.removeNode(node);
   }
 
   clearEjectedNodes() {
-    this._nodesEjected = [];
+    this.world.clearEjected();
   }
 
   // rainbow nodes
@@ -970,9 +956,10 @@ var isAdmin = false;
           // Checks if it's safe for players to spawn
             if (this.config.playerSafeSpawn === 1) {
               for (var j = 0; j < 30; j++) {
-                for (var i = 0; i < this._nodesPlayer.length; i++) {
+                var pnode = this.world.getNodes("player").toArray()
+                for (var i = 0; i < pnode.length; i++) {
                 var issafe = true;
-                var check = this._nodesPlayer[i];
+                var check = this.pnode[i];
                 var pos = this.getRandomPosition();
                 var playerSquareSize = (this.config.playerStartMass * 100) >> 0;
                 var squareR = check.mass * 100; // Checks player cell's radius
@@ -1181,9 +1168,9 @@ player.frozen = fro;
   var rightX = cell.position.x + r;
 
   // Loop through all viruses on the map. There is probably a more efficient way of doing this but whatever
-  var len = this._nodesVirus.length;
+  var len = this.getVirusNodes().length;
   for (var i = 0; i < len; i++) {
-    var check = this._nodesVirus[i];
+    var check = this.getVirusNodes()[i];
 
     if (typeof check === 'undefined') {
       continue;
