@@ -17,6 +17,7 @@ module.exports = class WorldModel {
     this.movingNodes = new SortedMap();
     this.playerNodes = SortedMap();
     this.virusNodes = SortedMap();
+    this.ejectedNodes = new SortedMap();
   }
 
   setNode(id, node, type) {
@@ -30,6 +31,8 @@ module.exports = class WorldModel {
         break;
       case "virus":
         this.setNodeAsVirus(id,node);
+      case "ejected":
+        this.setNodeAsEjected(id,node);
     }
   }
 
@@ -117,6 +120,10 @@ setAsNode(id, node) {
 }
   setNodeAsMoving(id, node) {
     this.movingNodes.set(id, node);
+  }
+  setNodeAsEjected(id, node) {
+    this.ejectedNodes.set(id,node);
+    
   }
   setNodeAsVirus(id, node) {
     this.virusNodes.set(id, node);
