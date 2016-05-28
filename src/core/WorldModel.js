@@ -102,7 +102,7 @@ module.exports = class WorldModel {
     this.virusNodes.delete(id);
   }
 
-  removeMovingNode(node) {
+  removeMovingNode(id) {
     this.movingNodes.delete(id);
   }
 
