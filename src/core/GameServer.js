@@ -613,7 +613,7 @@ stop() {
   }
 
   removeNodesPlayer(node) {
-    
+    this.world.removePlayerNode(node.getId())
   }
 
   // Virus Nodes
@@ -626,7 +626,7 @@ stop() {
   }
 
   removeVirusNode(node) {
-    
+    this.world.removeVirusNode(node.getId());
 }
   // Ejected Nodes
   getEjectedNodes() {
@@ -638,7 +638,7 @@ stop() {
   }
 
   removeEjectedNode(node) {
-  
+  this.world.removeEjectedNode(node.getId());
   }
 
   clearEjectedNodes() {
