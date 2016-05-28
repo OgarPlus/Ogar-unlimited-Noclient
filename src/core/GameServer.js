@@ -506,7 +506,6 @@ startingFood() {
   // todo for now leave it here
   addNode(node, type) {
     this.world.setNode(node.getId(), node, type);
-this.world.setAsNode(node.getId(),node);
 //   this._nodes.push(node);
     //if (type === "moving") {
     //  this.setAsMovingNode(node);
