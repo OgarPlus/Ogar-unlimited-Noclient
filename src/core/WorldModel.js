@@ -120,6 +120,18 @@ module.exports = class WorldModel {
 setAsNode(id, node) {
   this.nodes.set(id, node)
 }
+ clearEjected() {
+   this.ejectedNodes.clear();
+ }
+ clearMoving() {
+   this.movingNodes.clear();
+ }
+ clearVirus() {
+   this.virusNodes.clear();
+ }
+ clearPlayer() {
+   this.playerNodes.clear();
+ }
   setNodeAsMoving(id, node) {
     this.movingNodes.set(id, node);
   }
