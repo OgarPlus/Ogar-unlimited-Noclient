@@ -129,8 +129,14 @@ setAsNode(id, node) {
     this.virusNodes.set(id, node);
   }
 
-  removeMovingNode(id) {
-    this.movingNodes.delete(id);
+  removeEjectedNode(id) {
+    this.ejectedNodes.delete(id);
+  }
+  removePlayerNode(id) {
+    this.playerNodes.delete(id);
+  }
+  removeVirusNode(id) {
+    this.virusNodes.delete(id);
   }
 
   getMovingNodes() {
