@@ -36,6 +36,7 @@ module.exports = class WorldModel {
   addNode(node, type) {
     let id = this.getNewNodeId();
     this.setNode(id, node, type);
+    this.setAsNode(id, node);
     return id;
   }
 
@@ -111,7 +112,9 @@ module.exports = class WorldModel {
   getNextNodeId() {
     return this.getNewNodeId();
   }
-
+setAsNode(id, node) {
+  this.nodes.set(id, node)
+}
   setNodeAsMoving(id, node) {
     this.movingNodes.set(id, node);
   }
