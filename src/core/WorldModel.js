@@ -31,8 +31,10 @@ module.exports = class WorldModel {
         break;
       case "virus":
         this.setNodeAsVirus(id,node);
+        break;
       case "ejected":
         this.setNodeAsEjected(id,node);
+        break;
     }
   }
 
