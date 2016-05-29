@@ -599,7 +599,7 @@ stop() {
   }
 
   addPlayerNode(node) {
-    this.world.addNode(node, "player");
+    this.world.setNode(node.getID() ,node, "player");
   }
 
   getNodesPlayer() {
