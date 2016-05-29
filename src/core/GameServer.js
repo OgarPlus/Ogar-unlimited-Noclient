@@ -674,7 +674,7 @@ stop() {
 
     if (this.currentFood > 0) {
       // Spawn from food
-      let nodes = this.getWorld().getNodes();
+      let nodes = this.getWorld().getNodes("ejected");
       nodes.some((node)=> {
         if (!node || node.inRange) {
           // Skip if food is about to be eaten/undefined
