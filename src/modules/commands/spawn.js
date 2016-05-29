@@ -31,7 +31,10 @@ module.exports = function (gameServer, split) {
         } else
         if (cn == "virus") {
             var v = new Entity.Virus(gameServer.getWorld().getNextNodeId(), null, pos, mass);
-        gameServer.addNode(v);
+          if (gameServer.gameMode.ID == 2)
+          gameServer.addNode(v, "moving");
+         else
+           gameServer.addNode(v);
         console.log("[Console] Spawned 1 virus at coordinates (" + pos.x + " , " + pos.y + ") with a mass of " + mass + " ");
         } else
         if (cn == "mvirus") {
