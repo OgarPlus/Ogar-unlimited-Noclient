@@ -37,7 +37,7 @@ module.exports = class WorldModel {
         this.setNodeAsEjected(id,node);
         break;
       case "rainbow":
-        this.setNodeAsRaindbow(id,node);
+        this.setNodeAsRainbow(id,node);
         break;
     }
   }
