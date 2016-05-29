@@ -157,6 +157,11 @@ PacketHandler.prototype.handleMessage = function (message) {
             }
             break;
              case 99: // from cigar
+             for (var i in this.gameServer.plugins) {
+        if (this.gameServer.plugins[i].beforechat && this.gameServer.plugins[i].valid) {
+          if (!this.gameServer.plugins[i].beforechat(this.socket.playerTracker)) return;
+        }
+      }
              if (this.gameServer.config.allowChat == 1) {
              if (!this.socket.playerTracker.chatAllowed) {
                this.gameServer.pm(this.socket.playerTracker.pID," You are not allowed to chat!");
