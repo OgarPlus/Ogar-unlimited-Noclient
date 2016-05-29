@@ -910,8 +910,8 @@ var isAdmin = false;
     // Check for config
     if (this.config.adminConfig == 1) {
         // Make the required variables
-        adminArray = this.config.adminNames.split(";");
-        nadminArray = this.config.adminNewNames.split(";");
+       var adminArray = this.config.adminNames.split(";");
+        var nadminArray = this.config.adminNewNames.split(";");
 
         // Removes people trying fake admin
         for (i = 0; i < nadminArray.length; i++) {
