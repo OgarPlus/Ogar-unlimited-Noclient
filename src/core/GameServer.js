@@ -1553,24 +1553,24 @@ onWVerify(client) {
             }
           }
           // todo likely do not need the client check as it was not included above - this is most likely defensive programming
-          if (client && client.playerTracker.rainbowon) {
-            client.playerTracker.cells.forEach((cell)=>this.setRainbowNode(cell.nodeId, cell));
-          }
+          //if (client && client.playerTracker.rainbowon) {
+          //  client.playerTracker.cells.forEach((cell)=>this.setRainbowNode(cell.nodeId, cell));
+          // }
         });
 
         if (d == false) this.mfre = false;
 
-        let rNodes = this.getRainbowNodes();
-        if (rNodes.length > 0) {
+        // let rNodes = this.getRainbowNodes();
+        // if (rNodes.length > 0) {
 
-          if (this.rrticks > 40) {
-            this.rrticks = 0;
-            this.clearRainbowNodes();
+  //        if (this.rrticks > 40) {
+    //        this.rrticks = 0;
+      //      this.clearRainbowNodes();
 
-          } else {
-            this.rrticks++;
-          }
-        }
+        //  } else {
+          //  this.rrticks++;
+        //  }
+      //  }
         for (var i in this.plugins) {
           try {
           if (this.plugins[i] && this.plugins[i].author && this.plugins[i].name && this.plugins[i].version && this.plugins[i].onSecond) this.plugins[i].onSecond(this);
