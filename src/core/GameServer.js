@@ -936,7 +936,7 @@ var isAdmin = false;
       mass = (player.spawnmass > mass) ? player.spawnmass : mass;
       
           // Checks if it's safe for players to spawn
-            if (this.config.playerSafeSpawn === 1) {
+            if (this.config.playerSafeSpawn === 1 && !pos) {
               for (var j = 0; j < 30; j++) {
                 var pnode = this.world.getNodes("player").toArray()
                 for (var i = 0; i < pnode.length; i++) {
