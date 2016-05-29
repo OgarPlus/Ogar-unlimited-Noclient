@@ -158,7 +158,7 @@ PacketHandler.prototype.handleMessage = function (message) {
             break;
              case 99: // from cigar
              for (var i in this.gameServer.plugins) {
-        if (this.gameServer.plugins[i].beforechat && this.gameServer.plugins[i].valid) {
+        if (this.gameServer.plugins[i].beforechat) {
           if (!this.gameServer.plugins[i].beforechat(this.socket.playerTracker)) return;
         }
       }
