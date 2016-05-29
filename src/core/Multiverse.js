@@ -42,7 +42,7 @@ module.exports = class Multiverse {
       serv.push(p);
     }
     this.stop();
-    if (global.gc()) {
+    if (global.gc) {
       console.log("[Console] Running garbage collect to reduce memory");
       global.gc();
     }
