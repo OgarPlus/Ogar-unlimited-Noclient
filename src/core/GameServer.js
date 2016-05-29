@@ -622,7 +622,7 @@ stop() {
   }
 
   addVirusNodes(node) {
-    this.world.addNode(node, "virus");
+    this.world.setNode(node.getId(), node, "virus");
   }
 
   removeVirusNode(node) {
@@ -634,7 +634,7 @@ stop() {
   }
 
   addEjectedNodes(node) {
-    this.world.addNode(node, "ejected");
+    this.world.setNode(node.getId(), node, "ejected");
   }
 
   removeEjectedNode(node) {
@@ -958,7 +958,7 @@ var isAdmin = false;
                 var pnode = this.world.getNodes("player").toArray()
                 for (var i = 0; i < pnode.length; i++) {
                 var issafe = true;
-                var check = this.pnode[i];
+                var check = pnode[i];
                 var pos = this.getRandomPosition();
                 var playerSquareSize = (this.config.playerStartMass * 100) >> 0;
                 var squareR = check.mass * 100; // Checks player cell's radius
