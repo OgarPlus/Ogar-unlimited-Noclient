@@ -672,30 +672,13 @@ stop() {
     // Random spawns for players
     let pos;
 
-    if (this.currentFood > 0) {
-      // Spawn from food
-      let nodes = this.getWorld().getNodes("ejected");
-      nodes.some((node)=> {
-        if (!node || node.inRange) {
-          // Skip if food is about to be eaten/undefined
-          return false;
-        }
+   
+    
 
-        if (node.getType() == 1) {
-          pos = {
-            x: node.position.x,
-            y: node.position.y
-          };
-          this.removeNode(node);
-          return true;
-        }
-      });
-    }
-
-    if (!pos) {
+   
       // Get random spawn if no food cell is found
       pos = this.getRandomPosition();
-    }
+    
 
     return pos;
   }
@@ -1229,7 +1212,7 @@ player.frozen = fro;
       y: parent.position.y
     };
 
-    let newVirus = new Entity.Virus(this.world.getNextNodeId(), null, parentPos, this.config.virusmass);
+    let newVirus = new Entity.Virus(parent.getId(), null, parentPos, this.config.virusmass);
     newVirus.setAngle(parent.getAngle());
     newVirus.setpar(owner);
     newVirus.mass = 10;
