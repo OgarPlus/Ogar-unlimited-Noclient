@@ -553,9 +553,10 @@ startingFood() {
   // todo need to think about how to refactor this out
   removeNode(node) {
     if (!node) return;
+        node.onRemove(this);
     this.world.removeNode(node.getId());
     // Special on-remove actions
-    node.onRemove(this);
+
 
     // todo this is a big problem for splitting up the processes
     // Animation when eating
