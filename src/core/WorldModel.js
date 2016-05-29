@@ -17,6 +17,7 @@ module.exports = class WorldModel {
     this.movingNodes = new SortedMap();
     this.playerNodes = SortedMap();
     this.virusNodes = SortedMap();
+    this.rainbowNodes = SortedMap();
     this.ejectedNodes = new SortedMap();
   }
 
@@ -34,6 +35,9 @@ module.exports = class WorldModel {
         break;
       case "ejected":
         this.setNodeAsEjected(id,node);
+        break;
+      case "rainbow":
+        this.setNodeAsRaindbow(id,node);
         break;
     }
   }
@@ -66,6 +70,9 @@ module.exports = class WorldModel {
         break;
       case 'ejected':
         nodes = this.ejectedNodes;
+        break;
+      case 'rainbow':
+        nodes = this.rainbowNodes;
         break;
       default:
         nodes = this.nodes;
@@ -103,11 +110,13 @@ clearAll() {
     this.movingNodes.clear();
     this.playerNodes.clear();
     this.ejectedNodes.clear();
+    this.rainbowNodes.clear();
     this.virusNodes.clear();
 }
   removeNode(id) {
     this.nodes.delete(id);
     this.movingNodes.delete(id);
+    this.rainbowNodes.delete(id);
     this.playerNodes.delete(id);
     this.ejectedNodes.delete(id);
     this.virusNodes.delete(id);
@@ -149,6 +158,9 @@ setAsNode(id, node) {
   setNodeAsEjected(id, node) {
     this.ejectedNodes.set(id,node);
     
+  }
+  setNodeAsRainbow(id,node) {
+    this.rainbowNodes.set(id,node);
   }
   setNodeAsVirus(id, node) {
     this.virusNodes.set(id, node);
