@@ -75,8 +75,7 @@ FFA.prototype.onPlayerSpawn = function (gameServer, player) {
     }
 
     // Spawn player
-    gameServer.spawnPlayer(player, pos, startMass, true);
-    gameServer.config.playerSafeSpawn = 1;
+    gameServer.spawnPlayer(player, pos, startMass);
   }
 };
 FFA.prototype.onServerInit = function (gameServer) {
