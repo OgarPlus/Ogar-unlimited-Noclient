@@ -3,9 +3,9 @@
 module.exports = function (gameServer, split) {
   var nodes = gameServer.getWorld().getNodes().toArray();
   for (let i = 0; i < nodes.length; i++) {
-    if (!nodes[0]) continue;
-    gameServer.removeNode(nodes[0])
+    gameServer.removeNode(nodes[i])
     
   } 
+  gameServer.getWorld().clearAll();
   console.log("[Console] Reset the game");
 };
