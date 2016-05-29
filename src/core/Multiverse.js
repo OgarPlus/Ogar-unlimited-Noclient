@@ -211,11 +211,11 @@ this.servers[name] = undefined;
     } else {
     var execute = this.selected.consoleService.commands[first];
     if (typeof execute !== 'undefined') {
-      execute(this.selected.gameServer, split);
+      execute(this.selected.gameServer, split, true);
     } else {
       var execute = this.selected.gameServer.pluginCommands[first];
       if (typeof execute !== 'undefined') {
-        execute(this.selected.gameServer, split);
+        execute(this.selected.gameServer, split, true);
 
       } else {
          
