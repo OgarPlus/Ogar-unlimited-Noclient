@@ -221,6 +221,10 @@ gameServer.pluginLoader.load();
    });
   
   } else if (split[1] == "add") {
+    if (!sudo) {
+      console.log("[Console] You cannot install a plugin unless directly at the console!");
+      return;
+    }
     if (!split[3]) {
       
       console.log("[Console] Since you did not specify a valid save-as file name, we will generate a random one");
