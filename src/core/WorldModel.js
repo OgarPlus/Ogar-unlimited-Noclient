@@ -98,7 +98,13 @@ module.exports = class WorldModel {
     return foundNode;
 
   }
-
+clearAll() {
+   this.nodes.clear();
+    this.movingNodes.clear();
+    this.playerNodes.clear();
+    this.ejectedNodes.clear();
+    this.virusNodes.clear();
+}
   removeNode(id) {
     this.nodes.delete(id);
     this.movingNodes.delete(id);
