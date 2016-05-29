@@ -2,7 +2,7 @@ const fs = require("fs");
 const crypto = require('crypto');
 const request = require('request');
 // plugin command
-module.exports = function (gameServer, split) {
+module.exports = function (gameServer, split, fromConsole) {
   if (split[1] == "list") {
     console.log("[Console] --------------- Installed Plugins ---------------");
     for (var i in gameServer.plugins) {
