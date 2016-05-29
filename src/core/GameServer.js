@@ -31,7 +31,6 @@ module.exports = class GameServer {
     this.lastPlayerId = 1;
     this.running = true;
     this.multiverse = multiverse;
-    this._rainbowNodes = [];
     this._nodesMother = [];
     this._nodesBeacon = [];
     this._nodesSticky = [];
@@ -647,19 +646,19 @@ stop() {
 
   // rainbow nodes
   getRainbowNodes() {
-    return this._rainbowNodes;
+    return this.world.getNodes("rainbow").toArray();
   }
 
   addRainbowNode(node) {
-    this._rainbowNodes.push(node);
+    this.world.setNode(node.getId(),node,"rainbow");
   }
 
   setRainbowNode(index, node) {
-    this._rainbowNodes[index] = node;
+     this.world.setNode(node.getId(),node,"rainbow");
   }
 
   clearRainbowNodes() {
-    this._rainbowNodes = [];
+    this.world.getNodes("rainbow").clear();
   }
 
   //***************** refactoring nodes end
