@@ -62,6 +62,9 @@ module.exports = class WorldModel {
       case 'virus':
         nodes = this.virusNodes;
         break;
+      case 'ejected':
+        nodes = this.ejectedNodes;
+        break;
       default:
         nodes = this.nodes;
     }
