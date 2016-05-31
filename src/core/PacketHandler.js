@@ -129,6 +129,7 @@ PacketHandler.prototype.handleMessage = function (message) {
       }
       break;
        case 90: // from cigar
+       
             var message = "";
             var maxLen = this.gameServer.config.chatMaxMessageLength * 2; // 2 bytes per char
             var offset = 2;
@@ -156,8 +157,23 @@ PacketHandler.prototype.handleMessage = function (message) {
             }
             break;
              case 99: // from cigar
+             for (var i in this.gameServer.plugins) {
+        if (this.gameServer.plugins[i].beforechat) {
+          if (!this.gameServer.plugins[i].beforechat(this.socket.playerTracker)) return;
+        }
+      }
              if (this.gameServer.config.allowChat == 1) {
-             if (!this.socket.playerTracker.chatAllowed) return;
+             if (!this.socket.playerTracker.chatAllowed) {
+               this.gameServer.pm(this.socket.playerTracker.pID," You are not allowed to chat!");
+               return;
+             }
+             if (this.gameServer.config.specChatAllowed != 1) {
+               if (this.socket.playerTracker.cells.length < 1) {
+                 this.gameServer.pm(this.socket.playerTracker.pID," Please play to chat!");
+                 return;
+               }
+               
+             }
             var message = "",
                 maxLen = this.gameServer.config.chatMaxMessageLength * 2,
                 offset = 2,
@@ -278,7 +294,8 @@ PacketHandler.prototype.setNickname = function (newNick) {
     client.setName(newNick);
 
     // If client has no cells... then spawn a player
-    this.gameServer.gameMode.onPlayerSpawn(this.gameServer, client);
+    
+    if (!client.nospawn) this.gameServer.gameMode.onPlayerSpawn(this.gameServer, client);
 
     // Turn off spectate mode
     client.spectate = false;
