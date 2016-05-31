@@ -1,4 +1,4 @@
-var DynamicBuffer = require('./DynamicBuffer');
+var DynamicBuffer = require('./Buffer');
 
 function UpdateLeaderboard(leaderboard, packetLB, protocolVersion, sendingUser) {
     this.leaderboard = leaderboard;
