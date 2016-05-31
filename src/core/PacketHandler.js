@@ -294,7 +294,8 @@ PacketHandler.prototype.setNickname = function (newNick) {
     client.setName(newNick);
 
     // If client has no cells... then spawn a player
-    this.gameServer.gameMode.onPlayerSpawn(this.gameServer, client);
+    
+    if (!client.nospawn) this.gameServer.gameMode.onPlayerSpawn(this.gameServer, client);
 
     // Turn off spectate mode
     client.spectate = false;
