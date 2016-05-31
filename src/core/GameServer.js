@@ -1535,7 +1535,13 @@ onWVerify(client) {
 }.bind(this), 0);
       if (this.tickMain >= this.config.fps) { // 1 Second
       setTimeout(function() {
-        let a = [];
+       
+        // let rNodes = this.getRainbowNodes();
+        // if (rNodes.length > 0) {
+
+         if (this.rrticks > 10) {
+           this.rrticks = 0;
+         let a = [];
         let d = false;
 
         this.getClients().forEach((client)=> {
@@ -1552,24 +1558,14 @@ onWVerify(client) {
               }
             }
           }
-          // todo likely do not need the client check as it was not included above - this is most likely defensive programming
-          //if (client && client.playerTracker.rainbowon) {
-          //  client.playerTracker.cells.forEach((cell)=>this.setRainbowNode(cell.nodeId, cell));
-          // }
         });
 
         if (d == false) this.mfre = false;
 
-        // let rNodes = this.getRainbowNodes();
-        // if (rNodes.length > 0) {
 
-  //        if (this.rrticks > 40) {
-    //        this.rrticks = 0;
-      //      this.clearRainbowNodes();
-
-        //  } else {
-          //  this.rrticks++;
-        //  }
+          } else {
+            this.rrticks++;
+          }
       //  }
         for (var i in this.plugins) {
           try {
