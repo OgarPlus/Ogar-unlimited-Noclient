@@ -14,6 +14,7 @@ module.exports = class Multiverse {
     this.configService.load()
     this.banned = this.configService.getBanned();
     this.master = [];
+    this.ports = [];
     this.commands = Commands.multiverse;
     this.index = 0;
   }
@@ -80,7 +81,7 @@ module.exports = class Multiverse {
     }
   }
   create(name,ismaster, port, gamemode, desc) {
-    if (!this.servers[name]) {
+    if (!this.servers[name] && (-1 == this.ports.indexOf(port) || !port)) {
     var l = new ControlServer(this.version,undefined, port,ismaster, name, this.configService, this.banned, gamemode);
     l.init();
     l.start();
@@ -92,6 +93,8 @@ module.exports = class Multiverse {
       description: desc,
       isMaster: ismaster,
     }
+    
+  if (port) this.ports.push(port);
     var id = this.getNextId();
     l.id = id;
     this.info[id] = i;
@@ -109,6 +112,12 @@ module.exports = class Multiverse {
 var index = this.servers[name].id;
 if (index) {
     this.info.splice(index, 1);
+}
+if (port) {
+var index = this.ports.indexOf(this.servers[name].port)
+if (index != -1) {
+    this.ports.splice(index, 1);
+}
 }
 this.servers[name].stop();
 this.servers[name] = undefined;
