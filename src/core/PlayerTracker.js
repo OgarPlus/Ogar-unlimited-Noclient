@@ -290,6 +290,7 @@ if (this.gameServer.config.highscore == 1) {
 
   update() {
  setTimeout(function() {
+     if (this.socket.packetHandler.protocol == 0) return;
     // Actions buffer (So that people cant spam packets)
     if (this.socket.packetHandler.pressSpace) { // Split cell
     
@@ -409,7 +410,13 @@ if (this.gameServer.config.highscore == 1) {
 
     // Update leaderboard
     if (this.tickLeaderboard <= 0) {
-      this.socket.sendPacket(this.gameServer.lb_packet);
+     this.socket.sendPacket(this.gameServer.lb_packet);
+             this.socket.sendPacket(new Packet.UpdateLeaderboard(
+                 this.gameServer.leaderboard,
+                 this.gameServer.gameMode.packetLB,
+                 this.protocolVersion,
+                 this.pID
+             ));
       this.tickLeaderboard = 10; // 20 ticks = 1 second
     } else {
       this.tickLeaderboard--;
