@@ -40,23 +40,27 @@ PacketHandler.prototype.handleMessage = function (message) {
 
   switch (packetId) {
     case 0:
-      // Check for invalid packets
-      if ((view.byteLength + 1) % 2 == 1) {
-        break;
-      }
-
-      // Set Nickname
-      var nick = "";
-      var maxLen = this.gameServer.config.playerMaxNickLength * 2; // 2 bytes per char
-      for (var i = 1; i < view.byteLength && i <= maxLen; i += 2) {
-        var charCode = view.getUint16(i, true);
-        if (charCode == 0) {
-          break;
-        }
-
-        nick += String.fromCharCode(charCode);
-      }
-      this.setNickname(nick);
+     // Set Nickname
+            if (this.protocol == 5) {
+                // Check for invalid packets
+                if ((view.byteLength + 1) % 2 == 1) {
+                    break;
+                }
+                var nick = "";
+                var maxLen = this.gameServer.config.playerMaxNickLength * 2; // 2 bytes per char
+                for (var i = 1; i < view.byteLength && i <= maxLen; i += 2) {
+                    var charCode = view.getUint16(i, true);
+                    if (charCode == 0) {
+                        break;
+                    }
+    
+                    nick += String.fromCharCode(charCode);
+                }
+                this.setNickname(nick);
+            } else {
+                var name = message.slice(1, message.length - 1).toString().substr(0, this.gameServer.config.playerMaxNickLength);
+                this.setNickname(name);
+            }
       break;
     case 1:
       // Spectate mode
@@ -114,11 +118,12 @@ PacketHandler.prototype.handleMessage = function (message) {
      case 24:
       this.pressT = true;
     break;
-    case 255:
+    case 254:
       // Connection Start
       if (view.byteLength == 5) {
         this.protocol = view.getUint32(1, true);
         // Send SetBorder packet first
+        this.socket.sendPacket(new Packet.ClearNodes(this.protocol));
         var c = this.gameServer.config;
         this.socket.sendPacket(new Packet.SetBorder(
           c.borderLeft + this.socket.playerTracker.scrambleX, // Scramble
@@ -291,6 +296,9 @@ PacketHandler.prototype.setNickname = function (newNick) {
   var client = this.socket.playerTracker;
   if (client.cells.length < 1) {
     // Set name first
+    
+         // Clear client's nodes
+         this.socket.sendPacket(new Packet.ClearNodes());
     client.setName(newNick);
 
     // If client has no cells... then spawn a player
