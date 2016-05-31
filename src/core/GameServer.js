@@ -1514,7 +1514,8 @@ onWVerify(client) {
       this.tickMain++;
       setTimeout(function() {
       let count = 0;
-      this.getRainbowNodes().forEach((node)=> {
+      var rnodes = (this.config.rainbowMode == 1) ? this.world.getNodes() : this.getRainbowNodes();
+      rnodes.forEach((node)=> {
         if (!node) return;
         count++;
 
