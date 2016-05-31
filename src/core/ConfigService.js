@@ -15,6 +15,7 @@ module.exports = class ConfigService {
         adminStartMass: 500, // Amount of mass the admins start with.
         adminBlockNames: 1, // Block users using admin names.
         serverAdminPass: "",
+        rainbowMode: 0,
         specChatAllowed: 1,
         chatMaxMessageLength: 70, // Length of messages in chat
         chatIntervalTime: 2500, // ms between each message.
