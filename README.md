@@ -1,5 +1,5 @@
-# Ogar-unlimited
-Agario compatable. Missing some features such as custom leaderboard and skins
+# Ogar-Plus
+Sistem Güzel Gayet İyi Ama Bası Konsol Komutlarında Sıkıntı Var Ve Paket Eksikleri Var.
 
 
 ## Serbest Çalışma Amaçlı Clone Yapılmıştır ☺[ANTEPLİ/İBRAHİM]
